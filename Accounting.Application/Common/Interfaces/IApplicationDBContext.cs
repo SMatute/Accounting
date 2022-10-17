@@ -1,4 +1,5 @@
-﻿using Accounting.Domain.Master;
+﻿using Accounting.Domain.Entity;
+using Accounting.Domain.Master;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace Accounting.Application.Common.Interfaces
     public interface IApplicationDBContext
     {
         DbSet<AppSetting> AppSettings { get; set; }
+
+        DbSet<User> Users { get; set; } 
         Task<int> SaveChangesAsync();
     }
 }
