@@ -1,4 +1,4 @@
-﻿using Accounting.Application.Common.Interfaces;
+﻿
 using Accounting.Domain.Configuration;
 using Accounting.Domain.Entity;
 using Accounting.Domain.Master;
@@ -12,34 +12,25 @@ using System.Threading.Tasks;
 
 namespace Accounting.Infrastructure.Persistence
 {
-    public class ApplicationDBContext : IdentityDbContext, IApplicationDBContext
+    public class ApplicationDBContext : DbContext
     {
-        #region Ctor
+       
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
          : base(options)
         {
 
         }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<UsersRoles> UsersRoles { get; set; }   
 
-        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-            builder.ApplyConfiguration(new UserConfiguration());
-
+            builder.Entity<UsersRoles>()
+                .HasKey(p =>  new { p.UserId, p.RoleId });
         }
-        #endregion
-        #region DbSet
-        public DbSet<User> Users { get; set; }
-        public DbSet<AppSetting> AppSettings { get; set; }
-        #endregion
-        #region Methods
-        public Task<int> SaveChangesAsync()
-        {
-            return base.SaveChangesAsync();
-        }
-        #endregion
+         
 
     }
 }

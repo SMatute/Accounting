@@ -1,5 +1,4 @@
 ﻿
-using Accounting.Application.Common.Interfaces;
 using Accounting.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +21,7 @@ namespace Accounting.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("AccountingDataBase"),
                 b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName)), ServiceLifetime.Transient);
 
-            services.AddScoped<IApplicationDBContext>(provider => provider.GetService<ApplicationDBContext>());
-            return services;
+              return services;
 
           
         }
