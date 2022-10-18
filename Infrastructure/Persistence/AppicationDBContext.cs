@@ -23,14 +23,10 @@ namespace Accounting.Infrastructure.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<UsersRoles> UsersRoles { get; set; }   
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UsersRoles>()
                 .HasKey(p =>  new { p.UserId, p.RoleId });
         }
-         
-
     }
 }

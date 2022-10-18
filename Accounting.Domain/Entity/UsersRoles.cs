@@ -8,6 +8,7 @@ namespace Accounting.Domain.Entity
 {
     public class UsersRoles
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
 
@@ -15,3 +16,4 @@ namespace Accounting.Domain.Entity
         public Roles Roles { get; set; }
     }
 }
+
