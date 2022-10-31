@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Accounting.Application.Handlers.CommanHandlers
 {
-    public  class GetUserHandler: IRequestHandler<GetUsersQuery,IEnumerable<User>>
+    public  class GetUserHandler: IRequestHandler<GetUsersQuery,List<GetUserResponse>>
     {
         private readonly IUserRepository _userRepository;
 
@@ -23,10 +23,17 @@ namespace Accounting.Application.Handlers.CommanHandlers
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetUserResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
+           var response = await _userRepository.GetUserByName(request.Filter);
 
-          return await _userRepository.GetUserByName(request.Filter);  
+            return response.Select(p => new GetUserResponse
+            {
+                UserName = p.UserName,
+                CreatedAt = p.CreatedAt,
+                IsActive = p.IsActive,
+                UpdatedAt = p.UpdatedAt
+            }).ToList();
             
             
         }

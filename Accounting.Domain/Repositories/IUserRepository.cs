@@ -10,7 +10,7 @@ namespace Accounting.Domain.Repositories
 {
     public interface IUserRepository: IRepository<User>
     {
-        Task<IEnumerable<User>> GetUserByName(string name);
+        Task<List<User>> GetUserByName(string name);
 
         Task Create(User user);
     }

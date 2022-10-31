@@ -12,11 +12,11 @@ namespace Accounting.Infrastructure.Repositories
     {
         public UserRepository(ApplicationDBContext applicationDBContext): base(applicationDBContext) { }
        
-        public async Task<IEnumerable<User>> GetUserByName(string username)
+        public async Task<List<User>> GetUserByName(string username)
         {
             if (string.IsNullOrEmpty(username))
             {
-                return Enumerable.Empty<User>();
+                return await _applicationDBContext.Users.ToListAsync();
             }
             return await _applicationDBContext.Users.Where(x => x.UserName == username).ToListAsync();
         }

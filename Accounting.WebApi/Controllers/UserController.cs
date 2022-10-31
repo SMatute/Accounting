@@ -14,7 +14,7 @@ using System.Text;
 namespace Accounting.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/cuentas")]
+    [Route("api/Usuarios")]
     public class UserController: ControllerBase
     {
         private readonly IMediator _mediator;
@@ -24,13 +24,10 @@ namespace Accounting.WebApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("Usuarios")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-
-        public async Task<List<User>> Get()
+        [HttpGet]
+        public async Task<ActionResult> Get(string filter)
         {
-             return (List<User>) await _mediator.Send( new GetUsersQuery());
-            
+            return Ok(await _mediator.Send(new GetUsersQuery(filter)));
         }
 
         [HttpPost]

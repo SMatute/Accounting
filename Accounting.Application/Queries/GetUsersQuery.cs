@@ -1,4 +1,5 @@
-﻿using Accounting.Domain.Entity;
+﻿using Accounting.Application.Responses;
+using Accounting.Domain.Entity;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,14 @@ using System.Threading.Tasks;
 
 namespace Accounting.Application.Queries
 {
-    public  class GetUsersQuery:IRequest<IEnumerable<User>>
+    public  class GetUsersQuery:IRequest<List<GetUserResponse>>
     {
+
+        public GetUsersQuery(string filter)
+        {
+            Filter = filter;
+        }
+
         public string Filter { get; set;}
     }
 }
