@@ -9,6 +9,7 @@ namespace Accounting.Domain.Configuration
     {
         public void Configure(EntityTypeBuilder<Roles> builder)
         {
+            builder.HasKey(p => p.RoleId);
             builder.Property(p => p.Name).IsRequired();
             builder.Property(p => p.Name).HasMaxLength(50);
             builder.Property(p =>p.Description).IsRequired();

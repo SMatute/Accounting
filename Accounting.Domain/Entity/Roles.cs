@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Accounting.Domain.Entity
 {
     public class Roles
     {
+       
         public int RoleId { get; set; }
         public string Name { get; set; }        
         public string Description { get; set; }
